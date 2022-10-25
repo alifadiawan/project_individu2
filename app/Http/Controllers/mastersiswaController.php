@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\file;
+use Illuminate\Support\Facades\File;
 
 use App\Models\siswa;
 use App\Models\project;

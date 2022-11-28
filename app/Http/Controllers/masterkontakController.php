@@ -18,8 +18,9 @@ class masterkontakController extends Controller
      */
     public function index()
     {
-        $data=siswa::Paginate(5);
-        return view ('masterkontak', compact('data'));
+        $data = siswa::Paginate(5);
+        $jenis = jenis_kontak::all();
+        return view ('masterkontak', compact('data', 'jenis'));
     }
 
     /**
@@ -27,17 +28,21 @@ class masterkontakController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        
+
+    }
+
+    public function tambahkontak()
+    {
+        return view ('tambahjeniskontak');
     }
 
     public function tambah($id)
     {
-        $siswa = siswa::find($id);
-        $jenis_kontak = jenis_kontak::all();
-        return view('TambahKontak', compact('siswa', 'jenis_kontak'));
-
+        $siswa=siswa::find($id);
+        $jenis=jenis_kontak::all();
+        return view ('TambahKontak', compact('siswa', 'jenis'));
     }
 
     /**
@@ -50,20 +55,18 @@ class masterkontakController extends Controller
     {
         $message = [
             'required' => ':attribute harus diisi gaess',
-            'min' => ':attribute minimal :min karakter ya coy',
-            'max' => 'attribute makasimal :max karakter gaess',
-            'numeric' => ':attribute kudu diisi angka cak!!',
-            'mimes' => 'file :attribute harus bertipe :mimes'
         ];
         $validateData = $request->validate([
-            
+            'jenis_kontak_id' => 'required',
+            'deskripsi' => 'required',
         ], $message);
 
         kontak::create([
-            'siswa_id' => $request->sosmed,
-            'jenis_kontak_id' => $request->jenis_kontak,
+            'siswa_id' => $request->siswa_id,
+            'jenis_kontak_id' => $request->jenis_kontak_id,
             'deskripsi' => $request->deskripsi,
         ]);
+            
         Session::flash('benar', 'Selamat!!! Data Berhasil Ditambahkan');
         return redirect('/masterkontak');
     
@@ -91,7 +94,8 @@ class masterkontakController extends Controller
     {
         $kontak = kontak::find($id);
         $siswa = siswa::find($id);
-        return view('EditKontak', compact('kontak', 'siswa'));
+        $jenis = jenis_kontak::all();
+        return view('EditKontak', compact('kontak', 'siswa', 'jenis'));
     }
 
     /**
@@ -103,17 +107,10 @@ class masterkontakController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validateData = $request->validate([
-            'nama_project' => 'required',
-            'deskripsi' => 'required',
-            'tanggal' => 'required'
-        ], $message);
-
         $kontak = kontak::find($id);
         $kontak->jenis_kontak = $request->jenis_kontak;
         $kontak->deskripsi = $request->deskripsi;
         $kontak->save();
-        kontak::find($id)->update($validateData);
         Session::flash('update', 'Selamat!!! Project Anda Berhasil Diupdate');
         return redirect('/masterkontak');
     }
@@ -126,12 +123,12 @@ class masterkontakController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 
     public function hapus($id)
     {
-        $kontak=kontak::find($id)->delete();
+        $siswa = kontak::find($id);
+        $siswa->delete();
         Session::flash('success', 'data berhasil dihapus !!!');
         return redirect('/masterkontak');
     }

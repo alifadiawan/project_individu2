@@ -6,7 +6,7 @@ use App\Http\Controllers\mastersiswaController;
 use App\Http\Controllers\masterkontakController;
 use App\Http\Controllers\masterprojectController;
 use App\Http\Controllers\loginController;
-use App\Http\Controllers\jeniskontakController;
+use App\Http\Controllers\jeniskontak;
 use App\Http\Controllers\kontakController;
 
 /*
@@ -26,7 +26,7 @@ use App\Http\Controllers\kontakController;
 
 //guest
 route::middleware('guest')->group(function(){
-    Route::get('login', [loginController::class, 'index']);
+    Route::get('login', [loginController::class, 'index'])->name('login');
     Route::post('login', [loginController::class, 'authenticate']);
    
 
@@ -72,6 +72,7 @@ Route::get('/contact', function () {
 
 
 
+
 //controller
 route::middleware('auth')->group(function(){
     Route::resource('/mastersiswa', mastersiswaController::class);
@@ -80,16 +81,23 @@ route::middleware('auth')->group(function(){
     Route::resource('/masterkontak', masterkontakController::class);
     Route::get('masterkontak/{jenis_kontak}/tambah', [masterkontakController::class, 'tambah'])->name('masterkontak.tambah');
     Route::get('masterkontak/{jenis_kontak}/hapus', [masterkontakController::class, 'hapus'])->name('masterkontak.hapus');
+    Route::get('masterkontak/{jenis_kontak}/simpankontak', [masterkontakController::class, 'simpankontak'])->name('masterkontak.simpankontak');
+    
 
     Route::resource('/masterproject', masterprojectController::class);
     Route::get('masterproject/{id_siswa}/hapus', [masterprojectController::class, 'hapus'])->name('masterproject.hapus');
     Route::get('masterproject/{id_siswa}/tambah', [masterprojectController::class, 'tambah'])->name('masterproject.tambah');
 
-    Route::resource('jeniskontak', jeniskontakController::class);
-    Route::resource('kontak', kontakController::class);
+        Route::resource('jeniskontak', jeniskontak::class);
+        Route::get('jeniskontak/{jenis_kontak}/jeniskontak', [jeniskontak::class, 'hapus'])->name('jeniskontak.hapus');
+        
+        Route::resource('kontak', kontakController::class);
+        Route::post('masterkontak/store{id}', [kontakController::class, 'store']);
 
-    
-
+        
+        Route::get('/tambahjeniskontak', function () {
+            return view('tambahjeniskontak');
+        });
 
 
     Route::resource('/dashboard', DashboardController::class);

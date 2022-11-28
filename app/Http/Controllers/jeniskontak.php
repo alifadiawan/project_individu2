@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Support\Facades\session;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 use App\Models\siswa;
@@ -10,7 +9,7 @@ use App\Models\project;
 use App\Models\kontak;
 use App\Models\jenis_kontak;
 
-class jeniskontakController extends Controller
+class jeniskontak extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +18,7 @@ class jeniskontakController extends Controller
      */
     public function index()
     {
-        $data = jenis_kontak_siswa::Paginate(5);
-        return view('masterkontak', compact('data'));
+        //
     }
 
     /**
@@ -31,6 +29,7 @@ class jeniskontakController extends Controller
     public function create()
     {
         //
+        return view ('tambahjeniskontak');
     }
 
     /**
@@ -41,7 +40,12 @@ class jeniskontakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        jenis_kontak::create([
+            'jenis_kontak'=> $request-> jenis_kontak,
+        ]); 
+
+        Session::flash('success', 'data berhasil ditambah !!!');
+        return redirect('/masterkontak');
     }
 
     /**
@@ -52,8 +56,8 @@ class jeniskontakController extends Controller
      */
     public function show($id)
     {
-        $project=siswa::find($id)->project()->get();
-        return view('ShowProject', compact('project'));
+        $kontak=siswa::find($id)->kontak()->get();
+        return view('showkontak', compact('kontak'));
     }
 
     /**
@@ -87,6 +91,13 @@ class jeniskontakController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+    }
+
+    public function hapus($id)
+    {
+        $jenis_kontak=jenis_kontak::find($id)->delete();
+        Session::flash('success', 'data berhasil dihapus !!!');
+        return redirect('/masterkontak');
     }
 }

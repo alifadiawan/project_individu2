@@ -1,6 +1,6 @@
 
 @if ($kontak-> isEmpty())
-<h6>Siswa belum memiliki project</h6>
+<h6>Siswa belum memiliki Kontak </h6>
 @else
 @foreach ($kontak as $item)
     <div class="card">

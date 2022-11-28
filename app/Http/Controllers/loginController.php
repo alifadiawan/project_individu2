@@ -23,7 +23,7 @@ class loginController extends Controller
             return redirect()->intended('/dashboard');
         }
  
-        return back()->withErrors([
+        return back()->withErrors([ 
             'email' => 'email tidak sesuai',
         ])->onlyInput('email');
     }

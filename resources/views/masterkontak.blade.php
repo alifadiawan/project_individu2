@@ -5,8 +5,29 @@
 
     <!--Modal Tambah Data-->
     <div class="col-lg-12">
+        <table class="table">
+            @csrf
+            <thead class="bg-info">
+                <tr class="text-white text-center">
+                    <th scope="col">Jenis Kontak</th>
+                    <th scope="col">ACTION</th>
+                </tr>
+            </thead>
+            @foreach ($jenis as $item)
+                <tbody>
+                    <tr class="text-center">
+                        <th>{{$item -> jenis_kontak}}</th>
+                        <td class="text-center">
+                            <a class="btn-danger btn-sm btn-circle" href="{{route('jeniskontak.hapus' , $item->id)}}">
+                                <i class="btn-sm info fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            @endforeach
+            <a href="{{route('jeniskontak.create')}}" class="btn btn-info mb-3">TAMBAH JENIS KONTAK</a>
+        </table>
         <div class="card shadow mb-4">
-            
                 <!--Data Siswa-->
                 <div class="row">
                     <div class="col-lg-6">
@@ -15,7 +36,6 @@
                                 <h6 class="m-0 font-weight-bold text-white">Data Siswa</h6>
                             </div>
                             <div class="card-body ">
-
                                 <table class="table">
                                     @csrf
                                     <thead>
@@ -34,7 +54,7 @@
                                                     <a class="btn-warning btn-sm btn-circle" onclick="show({{ $item->id }})">
                                                         <i class="btn-sm info fas fa-folder-open"></i>
                                                     </a>
-                                                    <a class="btn-success btn-sm btn-circle" href="{{ route('masterkontak.tambah', $item->id) }}">
+                                                    <a class="btn-success btn-sm btn-circle" href="{{ route('masterkontak.tambah', $item -> id) }}">
                                                         <i class="btn-sm info fas fa-plus"></i>
                                                     </a>
                                                 </td>

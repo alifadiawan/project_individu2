@@ -68,8 +68,10 @@
                     <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-tasks"></i> Project Siswa</h6>
                 </div>
                 <div class="card-body text-center">
-                    @foreach ($kontaks as $kontak)
-                        <li>{{ $kontak->jenis_kontak }} : {{ $kontak->pivot->deskripsi }}</li>
+                    @foreach ($project as $project)
+                        <ul>
+                            <li>{{ $project->deskripsi }}</li>
+                        </ul>
                     @endforeach
                 </div>
             </div>

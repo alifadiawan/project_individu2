@@ -102,9 +102,10 @@ class mastersiswaController extends Controller
         $siswa=siswa::find($id);
         $project = project::find($id);
         $kontaks = $siswa->kontak()->get();
+        $project = $siswa->project()->get();
 
         // return $kontak;
-        return view ('ShowSiswa',compact('siswa', 'kontaks', 'project'));
+        return view ('ShowSiswa',compact('siswa', 'kontaks', 'project', 'project'));
     }
 
     /**

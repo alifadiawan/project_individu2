@@ -80,8 +80,10 @@ class masterkontakController extends Controller
      */
     public function show($id)
     {
+        $siswa = siswa::find($id);
+        $jenis = jenis_kontak::all();
         $kontak=siswa::find($id)->kontak()->get();
-        return view('showkontak', compact('kontak'));
+        return view('showkontak', compact('siswa', 'jenis' ,'kontak'));
     }
 
     /**
@@ -108,10 +110,10 @@ class masterkontakController extends Controller
     public function update(Request $request, $id)
     {
         $kontak = kontak::find($id);
-        $kontak->jenis_kontak = $request->jenis_kontak;
+        $kontak->jenis_kontak_id = $request->jenis_kontak_id;
         $kontak->deskripsi = $request->deskripsi;
         $kontak->save();
-        Session::flash('update', 'Selamat!!! Project Anda Berhasil Diupdate');
+        Session::flash('update', 'Selamat!!! kontak Anda Berhasil Diupdate');
         return redirect('/masterkontak');
     }
 

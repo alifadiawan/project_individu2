@@ -76,7 +76,7 @@
                             </div>
                             <div class="card-body " id="kontak">
                                 <div class="text-center">
-                                    
+                                    <h5>Belum memiliki kontak</h5>
                                 </div>
                             </div>
                         </div>

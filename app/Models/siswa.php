@@ -20,7 +20,7 @@ class siswa extends Model
 
     public function kontak()
     {
-        return $this->belongsToMany('App\Models\jenis_kontak', 'jenis_kontak_siswa')->withPivot('deskripsi');
+        return $this->belongsToMany('App\Models\jenis_kontak')->withPivot('deskripsi', 'id');
     }
 
     public function kons()

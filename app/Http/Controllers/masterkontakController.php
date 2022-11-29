@@ -123,12 +123,14 @@ class masterkontakController extends Controller
      */
     public function destroy($id)
     {
+        // $siswa = kontak::find($id)->delete();
+        // Session::flash('success', 'data berhasil dihapus !!!');
+        // return redirect('/masterkontak');
     }
 
     public function hapus($id)
     {
-        $siswa = kontak::find($id);
-        $siswa->delete();
+        $siswa = kontak::find($id)->delete();
         Session::flash('success', 'data berhasil dihapus !!!');
         return redirect('/masterkontak');
     }

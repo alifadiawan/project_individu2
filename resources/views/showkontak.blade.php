@@ -16,8 +16,8 @@
         </div>
 
         <div class="card-footer">
-            <a href="{{ route('masterkontak.edit' , $item -> id) }}" class="btn btn-sm btn-warning btn-circle"><i class="fas fa-edit"></i></a>
-            <a href="{{ route('masterkontak.hapus' , $item -> id) }}" class="btn btn-sm btn-danger btn-circle"><i class="fas fa-trash"></i></a>
+            <a href="{{ route('masterkontak.edit' , $item ->pivot->id) }}" class="btn btn-sm btn-warning btn-circle"><i class="fas fa-edit"></i></a>
+            <a href="{{ route('masterkontak.hapus' , $item ->pivot->id) }}" class="btn btn-sm btn-danger btn-circle"><i class="fas fa-trash"></i></a>
         </div>
     </div>
 @endforeach

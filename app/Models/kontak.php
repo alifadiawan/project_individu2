@@ -17,10 +17,10 @@ class kontak extends Model
     protected $table = 'jenis_kontak_siswa';
     
     public function siswa (){
-        return $this -> belongsTo('App\Models\siswa' , 'id');
+        return $this -> belongsTo('App\Models\siswa');
     }
 
     public function jenis  (){
-        return $this -> belongsTo('App\Models\jenis_kontak' , 'jenis_kontak_id');
+        return $this -> belongsTo('App\Models\jenis_kontak' , 'id_jenis');
     }
 }

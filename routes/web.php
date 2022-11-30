@@ -26,23 +26,9 @@ use App\Http\Controllers\kontakController;
 
 //guest
 route::middleware('guest')->group(function(){
+
     Route::get('login', [loginController::class, 'index'])->name('login');
     Route::post('login', [loginController::class, 'authenticate']);
-   
-
-        Route::get('/login', function () {
-        return view('login');
-    });
-
-    Route::get('/admin', function () {
-        return view('layout.admin');
-    });
-    Route::get('/TambahProject', function () {
-        return view('TambahProject');
-    });
-    Route::get('/EditKontak', function () {
-        return view('EditKontak');
-    });
 
 });
 
@@ -97,6 +83,16 @@ route::middleware('auth')->group(function(){
         
         Route::get('/tambahjeniskontak', function () {
             return view('tambahjeniskontak');
+        });
+
+        Route::get('/admin', function () {
+            return view('layout.admin');
+        });
+        Route::get('/TambahProject', function () {
+            return view('TambahProject');
+        });
+        Route::get('/EditKontak', function () {
+            return view('EditKontak');
         });
 
 
